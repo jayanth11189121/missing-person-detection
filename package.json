@@ -1,0 +1,19 @@
+{
+  "name": "lenslock-pro",
+  "version": "1.0.0",
+  "description": "Missing Person Detection System with AI",
+  "main": "backend/main.py",
+  "scripts": {
+    "dev": "python3 -m uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000",
+    "start": "python3 -m uvicorn backend.main:app --host 0.0.0.0 --port 8000",
+    "build": "echo 'Building application...' && python3 -m compileall backend/ && echo 'Build complete!'"
+  },
+  "keywords": [
+    "face-detection",
+    "missing-person",
+    "ai",
+    "computer-vision"
+  ],
+  "author": "",
+  "license": "MIT"
+}

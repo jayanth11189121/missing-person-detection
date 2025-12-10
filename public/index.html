@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LensLock - Missing Person Detection System</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <line x1="12" y1="2" x2="12" y2="6"></line>
+                    <line x1="12" y1="18" x2="12" y2="22"></line>
+                    <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+                    <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+                </svg>
+                <h1>LensLock</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#upload" class="nav-link active" data-section="upload">Upload</a>
+                <a href="#detections" class="nav-link" data-section="detections">Detections</a>
+                <a href="#reports" class="nav-link" data-section="reports">Reports</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section id="upload-section" class="content-section active">
+            <div class="hero-section">
+                <h2>Missing Person Detection System</h2>
+                <p>Upload reference images and videos to detect missing persons using advanced AI</p>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Register Missing Person</h3>
+                    </div>
+                    <form id="register-form" class="form">
+                        <div class="form-group">
+                            <label for="person-name">Name</label>
+                            <input type="text" id="person-name" name="name" required placeholder="Enter person's name">
+                        </div>
+                        <div class="form-group">
+                            <label for="person-description">Description</label>
+                            <textarea id="person-description" name="description" rows="3" placeholder="Additional details..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="reference-image">Reference Image</label>
+                            <div class="file-upload">
+                                <input type="file" id="reference-image" name="reference_image" accept="image/*" required>
+                                <div class="file-upload-placeholder">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="17 8 12 3 7 8"></polyline>
+                                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                                    </svg>
+                                    <span>Click to upload reference image</span>
+                                </div>
+                                <div class="file-preview" style="display: none;">
+                                    <img id="ref-image-preview" src="" alt="Preview">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span>Register Person</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Detect in Video</h3>
+                    </div>
+                    <form id="detect-form" class="form">
+                        <div class="form-group">
+                            <label for="select-person">Select Missing Person</label>
+                            <select id="select-person" name="missing_person_id" required>
+                                <option value="">Loading...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="video-upload">Upload Video</label>
+                            <div class="file-upload">
+                                <input type="file" id="video-upload" name="video" accept="video/*" required>
+                                <div class="file-upload-placeholder">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                                    </svg>
+                                    <span>Click to upload video</span>
+                                </div>
+                                <div class="file-name" style="display: none;"></div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span>Start Detection</span>
+                        </button>
+                        <div id="detection-progress" class="progress-container" style="display: none;">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <p class="progress-text">Processing video...</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="result-section" class="result-section" style="display: none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Detection Result</h3>
+                    </div>
+                    <div id="result-content" class="result-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="detections-section" class="content-section">
+            <div class="hero-section">
+                <h2>Recent Detections</h2>
+                <p>View all detection results from uploaded videos</p>
+            </div>
+            <div id="detections-list" class="detections-grid">
+                <div class="loading">Loading detections...</div>
+            </div>
+        </section>
+
+        <section id="reports-section" class="content-section">
+            <div class="hero-section">
+                <h2>Detection Reports</h2>
+                <p>Generate and download comprehensive reports</p>
+            </div>
+            <div id="reports-list" class="reports-grid">
+                <div class="loading">Loading reports...</div>
+            </div>
+        </section>
+    </main>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="/app.js"></script>
+</body>
+</html>
